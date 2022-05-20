@@ -1,6 +1,6 @@
 
 export default function Home() {
   return (
-    <h1>Dashgo</h1>
+    <h1>Dashgod test</h1>
   )
 }
