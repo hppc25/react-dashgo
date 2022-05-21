@@ -2,6 +2,7 @@ import { Box, Button, Checkbox, Flex, Heading, Icon, Table, Tbody, Td, Text, Th,
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import { Header } from "../../components/Header";
 import { Sidebar } from "../../components/Sidebar";
+import { Pagination } from "../../components/Pagination";
 
 export default function UserList() {
   return (
@@ -62,8 +63,35 @@ export default function UserList() {
                   </Button>
                 </Td>
               </Tr>
+              <Tr>
+                <Td px="6">
+                  <Checkbox colorScheme="pink" />
+                </Td>
+                <Td>
+                  <Box>
+                    <Text fontWeight="bold">Helder Correia</Text>
+                    <Text fontSize="small" color="gray.300">helder@gmail.com</Text>
+                  </Box>
+                </Td>
+                <Td>
+                  04 de May, 2022
+                </Td>
+                <Td>
+                  <Button
+                    as="a"
+                    size="sm"
+                    fontSize="small"
+                    colorScheme="purple"
+                    leftIcon={<Icon as={RiPencilLine} fontSize="16" />}
+                  >
+                    Edit
+                  </Button>
+                </Td>
+              </Tr>
             </Tbody>
           </Table>
+
+          <Pagination />
         </Box>
       </Flex>
     </Box>
