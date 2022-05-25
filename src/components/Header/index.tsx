@@ -1,4 +1,3 @@
-import {useState, useEffect} from 'react';
 import { Flex, Icon, IconButton, useBreakpointValue } from '@chakra-ui/react';
 import { RiMenuLine } from 'react-icons/ri';
 import { useSidebarDrawer } from '../../context/SidebarDrawerContext';
@@ -6,6 +5,7 @@ import { Logo } from './Logo';
 import { NotificationsNav } from './NotificationsNav';
 import { Profile } from './Profile';
 import { SearchBox } from './SearchBox';
+import useSSR from '../../hooks/useSSR';
 
 export function Header() {
 
@@ -16,11 +16,8 @@ export function Header() {
     lg: true,
   });
 
-  const [isSSR, setIsSSR] = useState(true);
+  const [isSSR] = useSSR();
 
-  useEffect(() => {
-    setIsSSR(false);
-  }, []);
 
   return(
     <Flex
@@ -34,7 +31,7 @@ export function Header() {
       align="center"
     >
 
-{ !isWideVersion && (
+{ !isSSR  && !isWideVersion && (
         <IconButton
           aria-label="Open Navigation"
           icon={<Icon as={RiMenuLine} />}
