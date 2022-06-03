@@ -1,11 +1,13 @@
+import { useEffect } from "react";
 import Link from "next/link";
-import { Box, Button, Checkbox, Flex, Heading, Icon, Table, Tbody, Td, Text, Th, Thead, Tr, useBreakpointValue } from "@chakra-ui/react";
+import { Box, Button, Checkbox, Flex, Heading, Icon, Spinner, Table, Tbody, Td, Text, Th, Thead, Tr, useBreakpointValue } from "@chakra-ui/react";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
+import { useQuery } from 'react-query';
+
 import { Header } from "../../components/Header";
 import { Sidebar } from "../../components/Sidebar";
 import { Pagination } from "../../components/Pagination";
 import useSSR from '../../hooks/useSSR';
-import { useEffect } from "react";
 
 export default function UserList() {
 
@@ -16,11 +18,13 @@ export default function UserList() {
     lg: true,
   })
 
-  useEffect(() => {
-    fetch('http://localhost:3000/api/users')
-      .then(response => response.json())
-      .then(data => console.log(data));
-  }, []);
+  const { data, isLoading, error } = useQuery('users', async () => {
+    const response = await fetch('http://localhost:3000/api/users');
+    const data = await response.json();
+
+    return data;
+  });
+
 
   return (
     <Box>
@@ -45,6 +49,16 @@ export default function UserList() {
             </Link>
           </Flex>
 
+          { isLoading ? (
+            <Flex py="5" justify="center">
+              <Spinner />
+            </Flex>
+          ) : error ? (
+            <Flex py="5" justify="center">
+              <Text>Error to get user data. Please try again later.</Text>
+            </Flex>
+          ) : (
+            <>
           <Table colorScheme="whiteAlpha">
             <Thead>
               <Tr>
@@ -94,8 +108,9 @@ export default function UserList() {
               </Tr>
             </Tbody>
           </Table>
-
           <Pagination />
+          </>
+          )}
         </Box>
       </Flex>
     </Box>
