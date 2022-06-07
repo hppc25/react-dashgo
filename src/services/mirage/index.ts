@@ -54,6 +54,7 @@ export function makeServer() {
 
       });
       this.post('/users');
+      this.get('/users/:id');
 
       // Change the namespace to empty to not conflict with Next's Root API
       this.namespace = '';
