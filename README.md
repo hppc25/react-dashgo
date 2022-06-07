@@ -16,7 +16,7 @@
 
 ## About the project
 
-The project aims to study and develop an application in ReactJS with NextJS to implement a dashboard.
+The project aims to study and develop an application in ReactJS with NextJS and Typescript to implement a dashboard.
 
 The application was developed using the NextJS framework using Chakra-ui to build the interface, React-Hook-Form to manage forms, Yup to validate forms, MirageJS to simulate an API.
 
