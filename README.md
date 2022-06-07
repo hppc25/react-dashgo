@@ -36,6 +36,8 @@ Below the technologies used to build the application
 - [TypeScript](https://www.typescriptlang.org/)
 - [Chakra-ui](https://chakra-ui.com/)
 - [React Hook Form](https://react-hook-form.com/)
+- [Apexcharts](https://apexcharts.com/docs/react-charts/)
+- [React Query](https://react-query.tanstack.com/)
 - [Yup](https://github.com/jquense/yup)
 - [MirageJS](https://miragejs.com/)
 
