@@ -29,7 +29,7 @@ The application was developed using the NextJS framework using Chakra-ui to buil
 
 ## Technologies
 
-Below the technologies used to build the application
+Technologies used to build the application
 
 - [ReactJS](https://reactjs.org/)
 - [NextJS](https://nextjs.org/)
