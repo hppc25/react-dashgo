@@ -5,7 +5,7 @@ import { Logo } from './Logo';
 import { NotificationsNav } from './NotificationsNav';
 import { Profile } from './Profile';
 import { SearchBox } from './SearchBox';
-import useSSR from '../../hooks/useSSR';
+import useSSR from '../../services/hooks/useSSR';
 
 export function Header() {
 
