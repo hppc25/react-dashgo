@@ -1,17 +1,31 @@
 import { useState } from "react";
 import Link from "next/link";
-import { Box, Button, Checkbox, Flex, Heading, Icon, Spinner, Table, Tbody, Td, Text, Th, Thead, Tr, useBreakpointValue } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Checkbox,
+  Flex,
+  Heading,
+  Icon,
+  Spinner,
+  Table,
+  Tbody,
+  Td,
+  Text,
+  Th,
+  Thead,
+  Tr,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
 
 import { useUsers } from "../../services/hooks/useUsers";
 import { Header } from "../../components/Header";
 import { Sidebar } from "../../components/Sidebar";
 import { Pagination } from "../../components/Pagination";
-import useSSR from '../../services/hooks/useSSR';
-
+import useSSR from "../../services/hooks/useSSR";
 
 export default function UserList() {
-
   const [page, setPage] = useState(1);
   const { data, isLoading, isFetching, error } = useUsers(page);
 
@@ -20,8 +34,7 @@ export default function UserList() {
   const isWideVersion = useBreakpointValue({
     base: false,
     lg: true,
-  })
-
+  });
 
   return (
     <Box>
@@ -34,10 +47,10 @@ export default function UserList() {
           <Flex mb="8" justify="space-between" align="center">
             <Heading size="lg" fontWeight="normal">
               <span>Users</span>
-              { !isLoading && isFetching && (
-                <Spinner size="sm" color="gray.500" ml="4"/>
-              ) }
-              </Heading>
+              {!isLoading && isFetching && (
+                <Spinner size="sm" color="gray.500" ml="4" />
+              )}
+            </Heading>
             <Link href="/users/create" passHref>
               <Button
                 as="a"
@@ -51,7 +64,7 @@ export default function UserList() {
             </Link>
           </Flex>
 
-          { isLoading ? (
+          {isLoading ? (
             <Flex py="5" justify="center">
               <Spinner />
             </Flex>
@@ -61,41 +74,37 @@ export default function UserList() {
             </Flex>
           ) : (
             <>
-          <Table colorScheme="whiteAlpha">
-            <Thead>
-              <Tr>
-                <Th px={['4', '4', '6']} color="gray.300" w="8">
-                  <Checkbox colorScheme="pink" />
-                </Th>
-                <Th>Users</Th>
-                  { !isSSR && isWideVersion && (
-                    <>
-                     <Th>Registration date</Th>
-                     <Th w="8"></Th>
-                     </>
-                  )}
-                
-              </Tr>
-            </Thead>
-            <Tbody>
-     
-            { data.users.map(user => (
+              <Table colorScheme="whiteAlpha">
+                <Thead>
+                  <Tr>
+                    <Th px={["4", "4", "6"]} color="gray.300" w="8">
+                      <Checkbox colorScheme="pink" />
+                    </Th>
+                    <Th>Users</Th>
+                    {!isSSR && isWideVersion && (
+                      <>
+                        <Th>Registration date</Th>
+                        <Th w="8"></Th>
+                      </>
+                    )}
+                  </Tr>
+                </Thead>
+                <Tbody>
+                  {data.users.map((user) => (
                     <Tr key={user.id}>
-                      <Td px={['4', '4', '6']}>
+                      <Td px={["4", "4", "6"]}>
                         <Checkbox colorScheme="pink" />
                       </Td>
                       <Td>
                         <Box>
                           <Text fontWeight="bold">{user.name}</Text>
-                          <Text fontSize="small" color="gray.300">{user.email}</Text>
+                          <Text fontSize="small" color="gray.300">
+                            {user.email}
+                          </Text>
                         </Box>
                       </Td>
-                      { isWideVersion && (
-                        <Td>
-                          {user.createdAt}
-                        </Td>
-                      )}
-                      { isWideVersion && (
+                      {isWideVersion && <Td>{user.createdAt}</Td>}
+                      {isWideVersion && (
                         <Td>
                           <Button
                             as="a"
@@ -109,15 +118,15 @@ export default function UserList() {
                         </Td>
                       )}
                     </Tr>
-                  )) }
-            </Tbody>
-          </Table>
-          <Pagination
+                  ))}
+                </Tbody>
+              </Table>
+              <Pagination
                 totalCountOfRegisters={data.totalCount}
                 currentPage={page}
                 onPageChange={setPage}
               />
-          </>
+            </>
           )}
         </Box>
       </Flex>
